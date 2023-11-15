@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: ts-crud
+spec:
+  replicas: 3
+  selector:
+    matchLabels:  
+      name: ts-crud
+  template:
+    metadata:
+      name: ts-crud
+      labels:
+        name: ts-crud
+    spec:
+      containers:
+        - name: ts-crud
+          image: sholehbaktiabadi/ts-crud
+          envFrom:
+            - configMapRef:
+                name: ts-crud-cm
+          resources:
+            requests:
+              cpu: 500m
+              memory: 500Mi
+            limits:
+              cpu: 1000m
+              memory: 2000Mi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ts-crud-service
+spec:
+  type: NodePort
+  selector:
+    name: ts-crud
+  ports:
+  - port: 5522
+    targetPort: 5522
+    nodePort: 30001
