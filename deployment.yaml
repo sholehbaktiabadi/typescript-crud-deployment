@@ -24,8 +24,15 @@ spec:
               cpu: 500m
               memory: 500Mi
             limits:
-              cpu: 1000m
+              cpu: 2000m
               memory: 2000Mi
+          volumeMounts:
+            - name: ts-crud-persistent-volume
+              mountPath: /mnt/mysql
+      volumes:
+        - name: ts-crud-persistent-volume
+          persistentVolumeClaim:
+            claimName: mysql-pv-claim           
 
 ---
 

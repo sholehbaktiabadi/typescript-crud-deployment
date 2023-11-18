@@ -7,7 +7,6 @@ spec:
     matchLabels:
       name: mysql
   serviceName: mysql-statefull-service
-  replicas: 3
   volumeClaimTemplates:
     - metadata:
         name: mysql-pv-claim
@@ -24,7 +23,7 @@ spec:
     spec:
       containers:
         - name: mysql
-          image: mysql:5.6
+          image: mysql:8.2.0
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
