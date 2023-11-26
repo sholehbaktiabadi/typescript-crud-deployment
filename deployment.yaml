@@ -3,7 +3,7 @@ kind: ReplicaSet
 metadata:
   name: ts-crud
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:  
       name: ts-crud
@@ -19,13 +19,13 @@ spec:
           envFrom:
             - configMapRef:
                 name: ts-crud-cm
-          resources:
-            requests:
-              cpu: 500m
-              memory: 500Mi
-            limits:
-              cpu: 2000m
-              memory: 2000Mi
+          # resources:
+          #   requests:
+          #     cpu: 500m
+          #     memory: 500Mi
+          #   limits:
+          #     cpu: 2000m
+          #     memory: 2000Mi
           volumeMounts:
             - name: ts-crud-persistent-volume
               mountPath: /mnt/mysql
